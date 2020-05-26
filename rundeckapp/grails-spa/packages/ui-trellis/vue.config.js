@@ -38,6 +38,7 @@ module.exports = {
       config.plugins.delete(`html-${entry}`)
       config.plugins.delete(`preload-${entry}`)
       config.plugins.delete(`prefetch-${entry}`)
+      config.plugins.delete('copy')
     })
 
     config.module.rule('ts').uses.delete('cache-loader')
