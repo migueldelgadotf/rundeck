@@ -65,6 +65,13 @@ module.exports = {
         if (/^\..*\.vue$/.test(request)) // Components requiring other components
           return callback(null, request)
 
+        /** Bundle javascript code inside components */
+        if (request.startsWith('./')
+          && !context.includes('node_modules')
+          && !request.includes('.vue')) {
+          return callback()
+        }
+
         if (request.startsWith('.')
             && !request.includes('?') // These are typically compile time generated files in flight
             && !context.includes('node_modules') // Runtime stuff still getting required from node_modules
