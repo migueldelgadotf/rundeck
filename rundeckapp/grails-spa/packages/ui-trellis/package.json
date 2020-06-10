@@ -51,6 +51,7 @@
     "babel-preset-vue": "^2.0.2",
     "concurrently": "^5.2.0",
     "less-loader": "^6.1.0",
+    "mobx": "^5.15.4",
     "node-sass": "^4.14.1",
     "prex": "^0.4.7",
     "run-script-os": "^1.1.1",
