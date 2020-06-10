@@ -2,14 +2,13 @@ import {observable} from 'mobx'
 
 
 class WorkflowStore {
-    @observable workflows
+    @observable workflows: Map<string, Workflow> = new Map()
 }
 
 class Workflow {
-    jobId: string
-    exec: string
+    jobId!: string
+    exec!: string
     @observable jobref?: IJobRef
-
 }
 
 interface IJobRef {
