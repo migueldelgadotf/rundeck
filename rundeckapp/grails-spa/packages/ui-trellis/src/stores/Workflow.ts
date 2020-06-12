@@ -2,19 +2,27 @@ import {observable} from 'mobx'
 
 
 class WorkflowStore {
-    @observable workflows: Map<string, Workflow> = new Map()
+    @observable.shallow workflows: Map<string, WorkflowStep> = new Map()
 }
 
-class Workflow {
-    jobId!: string
-    exec!: string
-    @observable jobref?: IJobRef
+class WorkflowStep {
+    jobref?: WorkflowStepJobref
+    jobId?: string
+    description?: string
+    exec?: string
+    script?: string
+    scriptfile?: string
+    scripturl?: string
+    type?: string
+    nodeStep?: string
+    workflow?: WorkflowStep[]
+
 }
 
-interface IJobRef {
-    name: string
-    group?: string
-    uuid: string
-    nodeStep: string
-    importOptions: boolean
+class WorkflowStepJobref {
+    name?: string;
+    group?: string;
+    uuid?: string;
+    nodeStep?: string;
+    importOptions?: boolean;
 }

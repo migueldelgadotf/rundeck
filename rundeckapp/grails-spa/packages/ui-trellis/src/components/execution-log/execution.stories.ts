@@ -5,7 +5,12 @@ import * as uiv from 'uiv'
 Vue.use(uiv)
 
 import LogViewer from './logViewer.vue'
-import { EnrichedExecutionOutput } from '../../utilities/ExecutionLogConsumer'
+import { EnrichedExecutionOutput, ExecutionLog } from '../../utilities/ExecutionLogConsumer'
+
+
+import {GetMockClient} from '../../../tests/unit/TsRundeckMock'
+import {Failed} from '../../../tests/data/ExecutionOutput'
+import { AtoB } from '../../../tests/utilities/Base64'
 
 export default {
     title: 'ExecutionViewer',
@@ -147,5 +152,25 @@ export const withOutput = () => (Vue.extend({
                 }
             })
         },
+    })
+}))
+
+
+const client = GetMockClient(JSON.parse(AtoB(Failed)))
+
+export const withFailed = () => (Vue.extend({
+    components: { LogViewer },
+    template: '<LogViewer :useUserSettings="false" executionId="1" style="height: 100%;" />',
+    mounted: function() {
+        const el = this.$el as any
+        el.parentNode.style.height = '100%'
+    },
+    props: {
+        
+    },
+    provide: () => ({
+        executionLogViewerFactory: function(){
+            return Promise.resolve(new ExecutionLog('880', client))
+        }
     })
 }))

@@ -30,8 +30,8 @@ export class ExecutionLog {
     private jobWorkflowProm!: Promise<JobWorkflow>
     private executionStatusProm!: Promise<ExecutionStatusGetResponse>
 
-    constructor(readonly id: string) {
-        this.client = window._rundeck.rundeckClient
+    constructor(readonly id: string, client?: Rundeck) {
+        this.client = client || window._rundeck.rundeckClient
     }
 
     /** Optional method to populate information about execution output */
